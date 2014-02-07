@@ -54,6 +54,14 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>SpriterObjectCollectionFile</Name>
     </None>
+    <None Include="Entities\Ground\GroundTMXFile.scnx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>GroundTMXFile</Name>
+    </None>
+    <None Include="Entities\Ground\tiles.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>tiles</Name>
+    </None>
     <None Include="Entities\Obstacle\PassThroughShapeCollectionFile.shcx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>PassThroughShapeCollectionFile</Name>
@@ -65,6 +73,10 @@
     <None Include="Screens\GameScreen\BoundaryShapeCollection.shcx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>BoundaryShapeCollection</Name>
+    </None>
+    <None Include="Screens\GameScreen\GroundSceneFile.scnx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>GroundSceneFile</Name>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

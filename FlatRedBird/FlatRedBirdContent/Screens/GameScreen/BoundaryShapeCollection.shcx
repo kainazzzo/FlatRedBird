@@ -3,7 +3,7 @@
   <AxisAlignedRectangleSaves>
     <AxisAlignedRectangleSave>
       <X>0</X>
-      <Y>-1324</Y>
+      <Y>1324</Y>
       <Z>0</Z>
       <ScaleX>200</ScaleX>
       <ScaleY>1024</ScaleY>
@@ -15,11 +15,11 @@
     </AxisAlignedRectangleSave>
     <AxisAlignedRectangleSave>
       <X>0</X>
-      <Y>435</Y>
+      <Y>-1324</Y>
       <Z>0</Z>
       <ScaleX>200</ScaleX>
-      <ScaleY>135</ScaleY>
-      <Name>AxisAlignedRectangle2</Name>
+      <ScaleY>1024</ScaleY>
+      <Name>AxisAlignedRectangle3</Name>
       <Alpha>1</Alpha>
       <Red>1</Red>
       <Green>1</Green>

@@ -38,14 +38,16 @@ namespace FlatRedBird.Screens
 		static bool HasBeenLoadedWithGlobalContentManager = false;
 		#endif
 		protected static FlatRedBall.Math.Geometry.ShapeCollection BoundaryShapeCollection;
+		protected static FlatRedBall.Scene GroundSceneFile;
 		
 		private FlatRedBird.Entities.Bird BirdInstance;
 		private PositionedObjectList<Obstacle> ObstacleList;
 		private FlatRedBall.Math.Geometry.ShapeCollection Boundary;
+		private FlatRedBird.Entities.Ground GroundInstance;
 		public System.Double SpawnFrequency = 3.5;
 		public int MaxObstacleY = 150;
 		public int MinObstacleY = -150;
-		public float ObstacleVelocityX = -150f;
+		public static float ObstacleVelocityX = -150f;
 
 		public GameScreen()
 			: base("GameScreen")
@@ -60,6 +62,8 @@ namespace FlatRedBird.Screens
 			BirdInstance = new FlatRedBird.Entities.Bird(ContentManagerName, false);
 			BirdInstance.Name = "BirdInstance";
 			ObstacleList = new PositionedObjectList<Obstacle>();
+			GroundInstance = new FlatRedBird.Entities.Ground(ContentManagerName, false);
+			GroundInstance.Name = "GroundInstance";
 			
 			
 			PostInitialize();
@@ -96,6 +100,7 @@ namespace FlatRedBird.Screens
 						ObstacleList[i].Activity();
 					}
 				}
+				GroundInstance.Activity();
 			}
 			else
 			{
@@ -132,6 +137,22 @@ namespace FlatRedBird.Screens
 			{
 				BoundaryShapeCollection.MakeOneWay();
 			}
+			if (this.UnloadsContentManagerWhenDestroyed && ContentManagerName != "Global")
+			{
+				GroundSceneFile.RemoveFromManagers(ContentManagerName != "Global");
+			}
+			else
+			{
+				GroundSceneFile.RemoveFromManagers(false);
+			}
+			if (this.UnloadsContentManagerWhenDestroyed && ContentManagerName != "Global")
+			{
+				GroundSceneFile = null;
+			}
+			else
+			{
+				GroundSceneFile.MakeOneWay();
+			}
 			
 			if (BirdInstance != null)
 			{
@@ -146,6 +167,11 @@ namespace FlatRedBird.Screens
 			{
 				Boundary.RemoveFromManagers(ContentManagerName != "Global");
 			}
+			if (GroundInstance != null)
+			{
+				GroundInstance.Destroy();
+				GroundInstance.Detach();
+			}
 
 			base.Destroy();
 
@@ -159,18 +185,51 @@ namespace FlatRedBird.Screens
 			bool oldShapeManagerSuppressAdd = FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = true;
 			Boundary.Visible = false;
+			if (GroundInstance.Parent == null)
+			{
+				GroundInstance.X = -400f;
+			}
+			else
+			{
+				GroundInstance.RelativeX = -400f;
+			}
+			if (GroundInstance.Parent == null)
+			{
+				GroundInstance.Y = -250f;
+			}
+			else
+			{
+				GroundInstance.RelativeY = -250f;
+			}
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = oldShapeManagerSuppressAdd;
 		}
 		public virtual void AddToManagersBottomUp ()
 		{
 			CameraSetup.ResetCamera(SpriteManager.Camera);
 			BoundaryShapeCollection.AddToManagers(mLayer);
+			GroundSceneFile.AddToManagers(mLayer);
 			BirdInstance.AddToManagers(mLayer);
 			Boundary.Visible = false;
+			GroundInstance.AddToManagers(mLayer);
+			if (GroundInstance.Parent == null)
+			{
+				GroundInstance.X = -400f;
+			}
+			else
+			{
+				GroundInstance.RelativeX = -400f;
+			}
+			if (GroundInstance.Parent == null)
+			{
+				GroundInstance.Y = -250f;
+			}
+			else
+			{
+				GroundInstance.RelativeY = -250f;
+			}
 			SpawnFrequency = 3.5;
 			MaxObstacleY = 150;
 			MinObstacleY = -150;
-			ObstacleVelocityX = -150f;
 		}
 		public virtual void ConvertToManuallyUpdated ()
 		{
@@ -179,6 +238,7 @@ namespace FlatRedBird.Screens
 			{
 				ObstacleList[i].ConvertToManuallyUpdated();
 			}
+			GroundInstance.ConvertToManuallyUpdated();
 		}
 		public static void LoadStaticContent (string contentManagerName)
 		{
@@ -200,7 +260,12 @@ namespace FlatRedBird.Screens
 			{
 			}
 			BoundaryShapeCollection = FlatRedBallServices.Load<FlatRedBall.Math.Geometry.ShapeCollection>(@"content/screens/gamescreen/boundaryshapecollection.shcx", contentManagerName);
+			if (!FlatRedBallServices.IsLoaded<FlatRedBall.Scene>(@"content/screens/gamescreen/groundscenefile.scnx", contentManagerName))
+			{
+			}
+			GroundSceneFile = FlatRedBallServices.Load<FlatRedBall.Scene>(@"content/screens/gamescreen/groundscenefile.scnx", contentManagerName);
 			FlatRedBird.Entities.Bird.LoadStaticContent(contentManagerName);
+			FlatRedBird.Entities.Ground.LoadStaticContent(contentManagerName);
 			CustomLoadStaticContent(contentManagerName);
 		}
 		[System.Obsolete("Use GetFile instead")]
@@ -210,6 +275,8 @@ namespace FlatRedBird.Screens
 			{
 				case  "BoundaryShapeCollection":
 					return BoundaryShapeCollection;
+				case  "GroundSceneFile":
+					return GroundSceneFile;
 			}
 			return null;
 		}
@@ -219,6 +286,8 @@ namespace FlatRedBird.Screens
 			{
 				case  "BoundaryShapeCollection":
 					return BoundaryShapeCollection;
+				case  "GroundSceneFile":
+					return GroundSceneFile;
 			}
 			return null;
 		}
@@ -228,6 +297,8 @@ namespace FlatRedBird.Screens
 			{
 				case  "BoundaryShapeCollection":
 					return BoundaryShapeCollection;
+				case  "GroundSceneFile":
+					return GroundSceneFile;
 			}
 			return null;
 		}

@@ -64,6 +64,7 @@ namespace FlatRedBird.Screens
 	            {
 	                obstacle1.Velocity = Vector3.Zero;
 	            }
+	            GroundInstance.Velocity = Vector3.Zero;
 	        }
 	    }
 

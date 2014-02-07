@@ -120,6 +120,10 @@
     <Compile Include="Entities\Bird.Generated.cs">
       <DependentUpon>Bird.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Ground.cs" />
+    <Compile Include="Entities\Ground.Generated.cs">
+      <DependentUpon>Ground.cs</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Obstacle.cs" />
     <Compile Include="Entities\Obstacle.Generated.cs">
       <DependentUpon>Obstacle.cs</DependentUpon>
@@ -153,6 +157,12 @@
     <Compile Include="SpriterPlugin\SpriterObjectAnimation.cs" />
     <Compile Include="SpriterPlugin\SpriterObjectCollection.cs" />
     <Compile Include="SpriterPlugin\SpriterPoint.cs" />
+    <Compile Include="TileCollisions\TileShapeCollection.cs" />
+    <Compile Include="TileGraphics\AnimationChainContainer.cs" />
+    <Compile Include="TileGraphics\LayeredTileMap.cs" />
+    <Compile Include="TileGraphics\MapDrawableBatch.cs" />
+    <Compile Include="TileGraphics\ReducedTileMapInfo.cs" />
+    <Compile Include="TileGraphics\Tileset.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
