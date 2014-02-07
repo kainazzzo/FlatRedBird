@@ -42,7 +42,7 @@ namespace FlappyBird.Screens
 		public System.Double SpawnFrequency = 3.5;
 		public int MaxObstacleY = 150;
 		public int MinObstacleY = -150;
-		public float ObstacleVelocityX = -100f;
+		public float ObstacleVelocityX = -150f;
 
 		public GameScreen()
 			: base("GameScreen")
@@ -143,7 +143,7 @@ namespace FlappyBird.Screens
 			SpawnFrequency = 3.5;
 			MaxObstacleY = 150;
 			MinObstacleY = -150;
-			ObstacleVelocityX = -100f;
+			ObstacleVelocityX = -150f;
 		}
 		public virtual void ConvertToManuallyUpdated ()
 		{

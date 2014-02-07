@@ -49,7 +49,7 @@
           </Properties>
           <Name>ObstacleVelocityX</Name>
           <Type>float</Type>
-          <DefaultValue xsi:type="xsd:float">-100</DefaultValue>
+          <DefaultValue xsi:type="xsd:float">-150</DefaultValue>
         </CustomVariable>
       </CustomVariables>
       <Name>Screens\GameScreen</Name>
