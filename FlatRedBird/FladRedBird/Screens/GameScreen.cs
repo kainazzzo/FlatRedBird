@@ -11,7 +11,7 @@ namespace FlatRedBird.Screens
 	{
 	    private double _lastSpawn = double.MinValue;
 	    readonly Random _random = new Random();
-	    private bool _spawning = true;
+	    private bool _winning = true;
 	    private int _score;
 
 	    void CustomInitialize()
@@ -23,7 +23,7 @@ namespace FlatRedBird.Screens
 		void CustomActivity(bool firstTimeCalled)
 		{
             Debugger.Write(string.Format("Score: {0}", _score));
-		    if (_spawning && PauseAdjustedSecondsSince(_lastSpawn) >= SpawnFrequency)
+		    if (_winning && PauseAdjustedSecondsSince(_lastSpawn) >= SpawnFrequency)
 		    {
 		        var obstacle = Factories.ObstacleFactory.CreateNew();
 		        obstacle.XVelocity = ObstacleVelocityX;
@@ -32,25 +32,40 @@ namespace FlatRedBird.Screens
 		        _lastSpawn = PauseAdjustedCurrentTime;
 		    }
 
-		    foreach (var obstacle in ObstacleList)
+		    if (BirdInstance.BirdCollision.CollideAgainst(Boundary))
 		    {
-		        if (BirdInstance.BirdCollision.CollideAgainst(obstacle.CollisionShapeCollection))
+		        GameOver();
+		    }
+		    else
+		    {
+		        foreach (var obstacle in ObstacleList)
 		        {
-		            BirdInstance.Velocity = Vector3.Zero;
-		            BirdInstance.Acceleration = Vector3.Zero;
-		            _spawning = false;
-		            foreach (var obstacle1 in ObstacleList)
+		            if (BirdInstance.BirdCollision.CollideAgainst(obstacle.CollisionShapeCollection))
 		            {
-		                obstacle1.Velocity = Vector3.Zero;
+		                GameOver();
+		            }
+		            else if (BirdInstance.BirdCollision.CollideAgainst(obstacle.PassThroughShapeCollection))
+		            {
+		                ++_score;
+		                obstacle.PassThroughShapeCollection.Clear();
 		            }
 		        }
-                else if (BirdInstance.BirdCollision.CollideAgainst(obstacle.PassThroughShapeCollection))
-                {
-                    ++_score;
-                    obstacle.PassThroughShapeCollection.Clear();
-                }
 		    }
 		}
+
+	    private void GameOver()
+	    {
+	        if (_winning)
+	        {
+	            BirdInstance.Velocity = Vector3.Zero;
+	            BirdInstance.Acceleration = Vector3.Zero;
+	            _winning = false;
+	            foreach (var obstacle1 in ObstacleList)
+	            {
+	                obstacle1.Velocity = Vector3.Zero;
+	            }
+	        }
+	    }
 
 	    void CustomDestroy()
 		{

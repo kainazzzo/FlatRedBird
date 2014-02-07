@@ -150,7 +150,7 @@ namespace FlatRedBird.Entities
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = true;
 			mBirdCollision.CopyAbsoluteToRelative(false);
 			mBirdCollision.AttachAllDetachedTo(this, false);
-			BirdCollision.Visible = true;
+			BirdCollision.Visible = false;
 			if (BirdSpriterObject.Parent == null)
 			{
 				BirdSpriterObject.CopyAbsoluteToRelative();
@@ -178,7 +178,7 @@ namespace FlatRedBird.Entities
 			RotationY = 0;
 			RotationZ = 0;
 			mBirdCollision.AddToManagers(layerToAddTo);
-			mBirdCollision.Visible = true;
+			mBirdCollision.Visible = false;
 			BirdSpriterObject.AddToManagers(layerToAddTo);
 			BirdSpriterObject.RelativeScaleX = 2f;
 			BirdSpriterObject.RelativeScaleY = 2f;

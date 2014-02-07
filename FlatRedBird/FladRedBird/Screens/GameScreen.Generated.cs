@@ -27,6 +27,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using FlatRedBall.Math;
+using FlatRedBall.Math.Geometry;
 
 namespace FlatRedBird.Screens
 {
@@ -36,9 +37,11 @@ namespace FlatRedBird.Screens
 		#if DEBUG
 		static bool HasBeenLoadedWithGlobalContentManager = false;
 		#endif
+		protected static FlatRedBall.Math.Geometry.ShapeCollection BoundaryShapeCollection;
 		
 		private FlatRedBird.Entities.Bird BirdInstance;
 		private PositionedObjectList<Obstacle> ObstacleList;
+		private FlatRedBall.Math.Geometry.ShapeCollection Boundary;
 		public System.Double SpawnFrequency = 3.5;
 		public int MaxObstacleY = 150;
 		public int MinObstacleY = -150;
@@ -53,6 +56,7 @@ namespace FlatRedBird.Screens
         {
 			// Generated Initialize
 			LoadStaticContent(ContentManagerName);
+			Boundary = BoundaryShapeCollection;
 			BirdInstance = new FlatRedBird.Entities.Bird(ContentManagerName, false);
 			BirdInstance.Name = "BirdInstance";
 			ObstacleList = new PositionedObjectList<Obstacle>();
@@ -112,6 +116,22 @@ namespace FlatRedBird.Screens
 		{
 			// Generated Destroy
 			ObstacleFactory.Destroy();
+			if (this.UnloadsContentManagerWhenDestroyed && ContentManagerName != "Global")
+			{
+				BoundaryShapeCollection.RemoveFromManagers(ContentManagerName != "Global");
+			}
+			else
+			{
+				BoundaryShapeCollection.RemoveFromManagers(false);
+			}
+			if (this.UnloadsContentManagerWhenDestroyed && ContentManagerName != "Global")
+			{
+				BoundaryShapeCollection = null;
+			}
+			else
+			{
+				BoundaryShapeCollection.MakeOneWay();
+			}
 			
 			if (BirdInstance != null)
 			{
@@ -121,6 +141,10 @@ namespace FlatRedBird.Screens
 			for (int i = ObstacleList.Count - 1; i > -1; i--)
 			{
 				ObstacleList[i].Destroy();
+			}
+			if (Boundary != null)
+			{
+				Boundary.RemoveFromManagers(ContentManagerName != "Global");
 			}
 
 			base.Destroy();
@@ -134,12 +158,15 @@ namespace FlatRedBird.Screens
 		{
 			bool oldShapeManagerSuppressAdd = FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = true;
+			Boundary.Visible = false;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = oldShapeManagerSuppressAdd;
 		}
 		public virtual void AddToManagersBottomUp ()
 		{
 			CameraSetup.ResetCamera(SpriteManager.Camera);
+			BoundaryShapeCollection.AddToManagers(mLayer);
 			BirdInstance.AddToManagers(mLayer);
+			Boundary.Visible = false;
 			SpawnFrequency = 3.5;
 			MaxObstacleY = 150;
 			MinObstacleY = -150;
@@ -169,20 +196,39 @@ namespace FlatRedBird.Screens
 				throw new Exception("This type has been loaded with a Global content manager, then loaded with a non-global.  This can lead to a lot of bugs");
 			}
 			#endif
+			if (!FlatRedBallServices.IsLoaded<FlatRedBall.Math.Geometry.ShapeCollection>(@"content/screens/gamescreen/boundaryshapecollection.shcx", contentManagerName))
+			{
+			}
+			BoundaryShapeCollection = FlatRedBallServices.Load<FlatRedBall.Math.Geometry.ShapeCollection>(@"content/screens/gamescreen/boundaryshapecollection.shcx", contentManagerName);
 			FlatRedBird.Entities.Bird.LoadStaticContent(contentManagerName);
 			CustomLoadStaticContent(contentManagerName);
 		}
 		[System.Obsolete("Use GetFile instead")]
 		public static object GetStaticMember (string memberName)
 		{
+			switch(memberName)
+			{
+				case  "BoundaryShapeCollection":
+					return BoundaryShapeCollection;
+			}
 			return null;
 		}
 		public static object GetFile (string memberName)
 		{
+			switch(memberName)
+			{
+				case  "BoundaryShapeCollection":
+					return BoundaryShapeCollection;
+			}
 			return null;
 		}
 		object GetMember (string memberName)
 		{
+			switch(memberName)
+			{
+				case  "BoundaryShapeCollection":
+					return BoundaryShapeCollection;
+			}
 			return null;
 		}
 

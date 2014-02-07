@@ -53,6 +53,13 @@
         </CustomVariable>
       </CustomVariables>
       <Name>Screens\GameScreen</Name>
+      <ReferencedFiles>
+        <ReferencedFileSave>
+          <Name>Screens/GameScreen/BoundaryShapeCollection.shcx</Name>
+          <IsSharedStatic>true</IsSharedStatic>
+          <RuntimeType>FlatRedBall.Math.Geometry.ShapeCollection</RuntimeType>
+        </ReferencedFileSave>
+      </ReferencedFiles>
       <NamedObjects>
         <NamedObjectSave>
           <SourceType>Entity</SourceType>
@@ -66,6 +73,19 @@
           <SourceClassType>PositionedObjectList&lt;T&gt;</SourceClassType>
           <SourceClassGenericType>Entities\Obstacle</SourceClassGenericType>
           <InstanceName>ObstacleList</InstanceName>
+          <AttachToContainer>true</AttachToContainer>
+          <IndependentOfCamera>true</IndependentOfCamera>
+        </NamedObjectSave>
+        <NamedObjectSave>
+          <CustomProperty>
+            <Type>bool</Type>
+            <Member>Visible</Member>
+            <ValueAsBool>false</ValueAsBool>
+          </CustomProperty>
+          <SourceType>File</SourceType>
+          <SourceFile>Screens/GameScreen/BoundaryShapeCollection.shcx</SourceFile>
+          <SourceName>Entire File (ShapeCollection)</SourceName>
+          <InstanceName>Boundary</InstanceName>
           <AttachToContainer>true</AttachToContainer>
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>
@@ -138,7 +158,7 @@
           <CustomProperty>
             <Type>bool</Type>
             <Member>Visible</Member>
-            <ValueAsBool>true</ValueAsBool>
+            <ValueAsBool>false</ValueAsBool>
           </CustomProperty>
           <SourceType>File</SourceType>
           <SourceFile>Entities/Bird/BirdShapeCollection.shcx</SourceFile>

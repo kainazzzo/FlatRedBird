@@ -36,7 +36,6 @@ namespace FlatRedBird.Entities
 		    BirdSpriterObject.Animating = false;
 		}
 
-	    private readonly float _upRotation = MathHelper.ToRadians(10f);
 	    private readonly float _downRotation = MathHelper.ToRadians(-30f);
 	    private readonly float _fastDownRotation = MathHelper.ToRadians(-80f);
 
@@ -51,7 +50,6 @@ namespace FlatRedBird.Entities
             if (YVelocity > 0 && (BirdSpriterObject.CurrentAnimation == null || !BirdSpriterObject.Animating ||BirdSpriterObject.CurrentAnimation.Name != "Flap"))
 		    {
 		        BirdSpriterObject.StartAnimation("Flap");
-		        RotationZ = _upRotation;
 		    }
             else if (YVelocity <= 0)
             {
