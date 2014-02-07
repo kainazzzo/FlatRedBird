@@ -19,8 +19,8 @@ using Microsoft.Xna.Framework.Media;
 #endif
 
 // Generated Usings
-using FlappyBird.Entities;
-using FlappyBird.Factories;
+using FlatRedBird.Entities;
+using FlatRedBird.Factories;
 using FlatRedBall;
 using FlatRedBall.Screens;
 using System;
@@ -28,7 +28,7 @@ using System.Collections.Generic;
 using System.Text;
 using FlatRedBall.Math;
 
-namespace FlappyBird.Screens
+namespace FlatRedBird.Screens
 {
 	public partial class GameScreen : Screen
 	{
@@ -37,8 +37,8 @@ namespace FlappyBird.Screens
 		static bool HasBeenLoadedWithGlobalContentManager = false;
 		#endif
 		
-		private FlappyBird.Entities.Bird BirdInstance;
-		private PositionedObjectList<FlappyBird.Entities.Obstacle> ObstacleList;
+		private FlatRedBird.Entities.Bird BirdInstance;
+		private PositionedObjectList<Obstacle> ObstacleList;
 		public System.Double SpawnFrequency = 3.5;
 		public int MaxObstacleY = 150;
 		public int MinObstacleY = -150;
@@ -53,9 +53,9 @@ namespace FlappyBird.Screens
         {
 			// Generated Initialize
 			LoadStaticContent(ContentManagerName);
-			BirdInstance = new FlappyBird.Entities.Bird(ContentManagerName, false);
+			BirdInstance = new FlatRedBird.Entities.Bird(ContentManagerName, false);
 			BirdInstance.Name = "BirdInstance";
-			ObstacleList = new PositionedObjectList<FlappyBird.Entities.Obstacle>();
+			ObstacleList = new PositionedObjectList<Obstacle>();
 			
 			
 			PostInitialize();
@@ -169,7 +169,7 @@ namespace FlappyBird.Screens
 				throw new Exception("This type has been loaded with a Global content manager, then loaded with a non-global.  This can lead to a lot of bugs");
 			}
 			#endif
-			FlappyBird.Entities.Bird.LoadStaticContent(contentManagerName);
+			FlatRedBird.Entities.Bird.LoadStaticContent(contentManagerName);
 			CustomLoadStaticContent(contentManagerName);
 		}
 		[System.Obsolete("Use GetFile instead")]

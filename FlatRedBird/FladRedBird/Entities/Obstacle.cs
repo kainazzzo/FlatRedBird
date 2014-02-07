@@ -24,20 +24,21 @@ using Texture2D = Microsoft.Xna.Framework.Graphics.Texture2D;
 #endif
 #endregion
 
-namespace FlappyBird.Entities
+namespace FlatRedBird.Entities
 {
-	public partial class Bird
+	public partial class Obstacle
 	{
 		private void CustomInitialize()
 		{
-		    YAcceleration = FallYAcceleration;
+
+
 		}
 
 		private void CustomActivity()
 		{
-		    if (InputManager.Keyboard.KeyPushed(Keys.Up))
+		    if (X <= -600f)
 		    {
-		        YVelocity = BounceYVelocity;
+		        Destroy();
 		    }
 		}
 

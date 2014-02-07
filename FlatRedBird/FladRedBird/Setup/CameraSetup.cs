@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 using System.Linq;
 #endif
 
-namespace FlappyBird
+namespace FlatRedBird
 {
 	internal static class CameraSetup
 	{

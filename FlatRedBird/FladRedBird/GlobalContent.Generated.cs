@@ -10,7 +10,7 @@ using FlatRedBall.Utilities;
 using BitmapFont = FlatRedBall.Graphics.BitmapFont;
 using FlatRedBall.Localization;
 
-namespace FlappyBird
+namespace FlatRedBird
 {
 	public static partial class GlobalContent
 	{

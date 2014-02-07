@@ -1,6 +1,6 @@
 using System;
 
-namespace FlappyBird
+namespace FlatRedBird
 {
 #if WINDOWS || XBOX
     static class Program

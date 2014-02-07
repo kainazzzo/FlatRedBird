@@ -1,11 +1,11 @@
 using System;
-using FlappyBird.Entities;
+using FlatRedBird.Entities;
 using FlatRedBall.Content;
 using FlatRedBall.Debugging;
 using FlatRedBall.Math;
 using Microsoft.Xna.Framework;
 
-namespace FlappyBird.Screens
+namespace FlatRedBird.Screens
 {
 	public partial class GameScreen
 	{

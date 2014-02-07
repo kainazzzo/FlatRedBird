@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace FlappyBird.Performance
+namespace FlatRedBird.Performance
 {
     public class PoolList<T> where T : IPoolable
     {

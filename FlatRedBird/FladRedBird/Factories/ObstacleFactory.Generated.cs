@@ -1,10 +1,10 @@
-using FlappyBird.Entities;
+using FlatRedBird.Entities;
 using System;
 using FlatRedBall.Math;
 using FlatRedBall.Graphics;
-using FlappyBird.Performance;
+using FlatRedBird.Performance;
 
-namespace FlappyBird.Factories
+namespace FlatRedBird.Factories
 {
 	public class ObstacleFactory : IEntityFactory
 	{

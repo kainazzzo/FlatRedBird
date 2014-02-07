@@ -3,11 +3,11 @@ using BitmapFont = FlatRedBall.Graphics.BitmapFont;
 using Cursor = FlatRedBall.Gui.Cursor;
 using GuiManager = FlatRedBall.Gui.GuiManager;
 // Generated Usings
-using FlappyBird.Screens;
+using FlatRedBird.Screens;
 using FlatRedBall.Graphics;
 using FlatRedBall.Math;
-using FlappyBird.Entities;
-using FlappyBird.Factories;
+using FlatRedBird.Entities;
+using FlatRedBird.Factories;
 using FlatRedBall;
 using FlatRedBall.Screens;
 using System;
@@ -33,7 +33,7 @@ using Texture2D = Microsoft.Xna.Framework.Graphics.Texture2D;
 using Model = Microsoft.Xna.Framework.Graphics.Model;
 #endif
 
-namespace FlappyBird.Entities
+namespace FlatRedBird.Entities
 {
 	public partial class Bird : PositionedObject, IDestroyable
 	{

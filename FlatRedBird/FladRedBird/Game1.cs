@@ -18,7 +18,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 #endif
 
-namespace FlappyBird
+namespace FlatRedBird
 {
     public class Game1 : Microsoft.Xna.Framework.Game
     {
@@ -45,7 +45,7 @@ namespace FlappyBird
 			GlobalContent.Initialize();
 			CameraSetup.SetupCamera(SpriteManager.Camera, graphics);
 
-			FlatRedBall.Screens.ScreenManager.Start(typeof(FlappyBird.Screens.GameScreen));
+			FlatRedBall.Screens.ScreenManager.Start(typeof(FlatRedBird.Screens.GameScreen));
 
             base.Initialize();
         }
