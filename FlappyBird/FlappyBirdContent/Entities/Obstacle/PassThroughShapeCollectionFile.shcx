@@ -2,11 +2,11 @@
 <ShapeCollectionSave xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <AxisAlignedRectangleSaves>
     <AxisAlignedRectangleSave>
-      <X>0</X>
+      <X>70</X>
       <Y>0</Y>
       <Z>0</Z>
-      <ScaleX>32</ScaleX>
-      <ScaleY>70</ScaleY>
+      <ScaleX>1</ScaleX>
+      <ScaleY>80</ScaleY>
       <Name>AxisAlignedRectangle5</Name>
       <Alpha>1</Alpha>
       <Red>1</Red>
