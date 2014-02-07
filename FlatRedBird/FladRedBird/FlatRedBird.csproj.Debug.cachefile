@@ -3,4 +3,5 @@ Content\Entities\Bird\redball.png
 Content\Entities\Bird\SpriterObjectCollectionFile.scml
 Content\Entities\Obstacle\PassThroughShapeCollectionFile.shcx
 Content\Entities\Obstacle\ShapeCollectionFile.shcx
+Content\Screens\GameScreen\BoundaryShapeCollection.shcx
 redball.BMP

@@ -50,10 +50,11 @@ namespace FlatRedBird.Entities
             if (YVelocity > 0 && (BirdSpriterObject.CurrentAnimation == null || !BirdSpriterObject.Animating ||BirdSpriterObject.CurrentAnimation.Name != "Flap"))
 		    {
 		        BirdSpriterObject.StartAnimation("Flap");
+                RotationZ = 0f;
 		    }
             else if (YVelocity <= 0)
             {
-                RotationZ = 0f;
+                BirdSpriterObject.StartAnimation("Flap");
                 BirdSpriterObject.Animating = false;
             }
             
