@@ -46,6 +46,14 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>BirdShapeCollection</Name>
     </None>
+    <None Include="Entities\Bird\redball.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>redball</Name>
+    </None>
+    <None Include="Entities\Bird\SpriterObjectCollectionFile.scml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>SpriterObjectCollectionFile</Name>
+    </None>
     <None Include="Entities\Obstacle\PassThroughShapeCollectionFile.shcx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>PassThroughShapeCollectionFile</Name>

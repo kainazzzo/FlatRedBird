@@ -14,6 +14,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using FlatRedBall.Math.Geometry;
+using FlatRedBall_Spriter;
+using Microsoft.Xna.Framework.Graphics;
 
 #if XNA4 || WINDOWS_8
 using Color = Microsoft.Xna.Framework.Color;
@@ -52,6 +54,8 @@ namespace FlatRedBird.Entities
 		static List<string> mRegisteredUnloads = new List<string>();
 		static List<string> LoadedContentManagers = new List<string>();
 		protected static FlatRedBall.Math.Geometry.ShapeCollection BirdShapeCollection;
+		protected static FlatRedBall_Spriter.SpriterObjectCollection SpriterObjectCollectionFile;
+		protected static Microsoft.Xna.Framework.Graphics.Texture2D redball;
 		
 		private FlatRedBall.Math.Geometry.ShapeCollection mBirdCollision;
 		public FlatRedBall.Math.Geometry.ShapeCollection BirdCollision
@@ -61,6 +65,7 @@ namespace FlatRedBird.Entities
 				return mBirdCollision;
 			}
 		}
+		private FlatRedBall_Spriter.SpriterObject BirdSpriterObject;
 		public float FallYAcceleration = -600f;
 		public float BounceYVelocity = 250f;
 		protected Layer LayerProvidedByContainer = null;
@@ -91,6 +96,7 @@ namespace FlatRedBird.Entities
 			// Generated Initialize
 			LoadStaticContent(ContentManagerName);
 			mBirdCollision = BirdShapeCollection.Clone();
+			BirdSpriterObject = SpriterObjectCollectionFile.FindByName("Bird").Clone();
 			
 			PostInitialize();
 			if (addToManagers)
@@ -128,6 +134,10 @@ namespace FlatRedBird.Entities
 			{
 				BirdCollision.RemoveFromManagers(ContentManagerName != "Global");
 			}
+			if (BirdSpriterObject != null)
+			{
+				BirdSpriterObject.Destroy();
+			}
 
 
 			CustomDestroy();
@@ -141,6 +151,13 @@ namespace FlatRedBird.Entities
 			mBirdCollision.CopyAbsoluteToRelative(false);
 			mBirdCollision.AttachAllDetachedTo(this, false);
 			BirdCollision.Visible = true;
+			if (BirdSpriterObject.Parent == null)
+			{
+				BirdSpriterObject.CopyAbsoluteToRelative();
+				BirdSpriterObject.AttachTo(this, false);
+			}
+			BirdSpriterObject.RelativeScaleX = 2f;
+			BirdSpriterObject.RelativeScaleY = 2f;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = oldShapeManagerSuppressAdd;
 		}
 		public virtual void AddToManagersBottomUp (Layer layerToAddTo)
@@ -162,6 +179,9 @@ namespace FlatRedBird.Entities
 			RotationZ = 0;
 			mBirdCollision.AddToManagers(layerToAddTo);
 			mBirdCollision.Visible = true;
+			BirdSpriterObject.AddToManagers(layerToAddTo);
+			BirdSpriterObject.RelativeScaleX = 2f;
+			BirdSpriterObject.RelativeScaleY = 2f;
 			X = oldX;
 			Y = oldY;
 			Z = oldZ;
@@ -210,6 +230,16 @@ namespace FlatRedBird.Entities
 					registerUnload = true;
 				}
 				BirdShapeCollection = FlatRedBallServices.Load<FlatRedBall.Math.Geometry.ShapeCollection>(@"content/entities/bird/birdshapecollection.shcx", ContentManagerName);
+				if (!FlatRedBallServices.IsLoaded<FlatRedBall_Spriter.SpriterObjectCollection>(@"content/entities/bird/spriterobjectcollectionfile.scml", ContentManagerName))
+				{
+					registerUnload = true;
+				}
+				SpriterObjectCollectionFile = SpriterObjectSave.FromFile("content/entities/bird/spriterobjectcollectionfile.scml").ToRuntime();
+				if (!FlatRedBallServices.IsLoaded<Microsoft.Xna.Framework.Graphics.Texture2D>(@"content/entities/bird/redball.png", ContentManagerName))
+				{
+					registerUnload = true;
+				}
+				redball = FlatRedBallServices.Load<Microsoft.Xna.Framework.Graphics.Texture2D>(@"content/entities/bird/redball.png", ContentManagerName);
 			}
 			if (registerUnload && ContentManagerName != FlatRedBallServices.GlobalContentManager)
 			{
@@ -238,6 +268,15 @@ namespace FlatRedBird.Entities
 					BirdShapeCollection.RemoveFromManagers(ContentManagerName != "Global");
 					BirdShapeCollection= null;
 				}
+				if (SpriterObjectCollectionFile != null)
+				{
+					SpriterObjectCollectionFile.Destroy();
+					SpriterObjectCollectionFile= null;
+				}
+				if (redball != null)
+				{
+					redball= null;
+				}
 			}
 		}
 		[System.Obsolete("Use GetFile instead")]
@@ -247,6 +286,10 @@ namespace FlatRedBird.Entities
 			{
 				case  "BirdShapeCollection":
 					return BirdShapeCollection;
+				case  "SpriterObjectCollectionFile":
+					return SpriterObjectCollectionFile;
+				case  "redball":
+					return redball;
 			}
 			return null;
 		}
@@ -256,6 +299,10 @@ namespace FlatRedBird.Entities
 			{
 				case  "BirdShapeCollection":
 					return BirdShapeCollection;
+				case  "SpriterObjectCollectionFile":
+					return SpriterObjectCollectionFile;
+				case  "redball":
+					return redball;
 			}
 			return null;
 		}
@@ -265,6 +312,10 @@ namespace FlatRedBird.Entities
 			{
 				case  "BirdShapeCollection":
 					return BirdShapeCollection;
+				case  "SpriterObjectCollectionFile":
+					return SpriterObjectCollectionFile;
+				case  "redball":
+					return redball;
 			}
 			return null;
 		}

@@ -12,6 +12,7 @@ using FlatRedBall.Graphics.Particle;
 
 using FlatRedBall.Math.Geometry;
 using FlatRedBall.Math.Splines;
+using Microsoft.Xna.Framework;
 using BitmapFont = FlatRedBall.Graphics.BitmapFont;
 using Cursor = FlatRedBall.Gui.Cursor;
 using GuiManager = FlatRedBall.Gui.GuiManager;
@@ -31,6 +32,8 @@ namespace FlatRedBird.Entities
 		private void CustomInitialize()
 		{
 		    YAcceleration = FallYAcceleration;
+		    BirdSpriterObject.StartAnimation("Flap");
+		    BirdSpriterObject.Animating = false;
 		}
 
 		private void CustomActivity()
@@ -38,7 +41,27 @@ namespace FlatRedBird.Entities
 		    if (InputManager.Keyboard.KeyPushed(Keys.Up))
 		    {
 		        YVelocity = BounceYVelocity;
+                RotationZ = 0f;
 		    }
+
+            if (YVelocity > 0 && (BirdSpriterObject.CurrentAnimation == null || !BirdSpriterObject.Animating ||BirdSpriterObject.CurrentAnimation.Name != "Flap"))
+		    {
+		        BirdSpriterObject.StartAnimation("Flap");
+		        RotationZ = 0f;
+		    }
+            else if (YVelocity <= 0)
+            {
+                BirdSpriterObject.Animating = false;
+            }
+            
+            if (YVelocity <= -350)
+            {
+                RotationZ = MathHelper.ToRadians(-70f);
+            }
+            else if (YVelocity <= -200)
+            {
+                RotationZ = MathHelper.ToRadians(-40f);
+            }
 		}
 
 		private void CustomDestroy()

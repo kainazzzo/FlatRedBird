@@ -1,4 +1,6 @@
 Content\Entities\Bird\BirdShapeCollection.shcx
+Content\Entities\Bird\redball.png
+Content\Entities\Bird\SpriterObjectCollectionFile.scml
 Content\Entities\Obstacle\PassThroughShapeCollectionFile.shcx
 Content\Entities\Obstacle\ShapeCollectionFile.shcx
 redball.BMP
