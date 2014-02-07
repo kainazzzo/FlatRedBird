@@ -26,7 +26,7 @@ using Texture2D = Microsoft.Xna.Framework.Graphics.Texture2D;
 
 namespace FlappyBird.Entities
 {
-	public partial class Obstacle
+	public partial class Bird
 	{
 		private void CustomInitialize()
 		{
@@ -36,10 +36,8 @@ namespace FlappyBird.Entities
 
 		private void CustomActivity()
 		{
-		    if (X <= -600f)
-		    {
-		        Destroy();
-		    }
+
+
 		}
 
 		private void CustomDestroy()

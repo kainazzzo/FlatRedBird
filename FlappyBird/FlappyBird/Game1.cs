@@ -45,7 +45,7 @@ namespace FlappyBird
 			GlobalContent.Initialize();
 			CameraSetup.SetupCamera(SpriteManager.Camera, graphics);
 
-            //ScreenManager.Start(typeof(SomeScreen).FullName);
+			FlatRedBall.Screens.ScreenManager.Start(typeof(FlappyBird.Screens.GameScreen));
 
             base.Initialize();
         }

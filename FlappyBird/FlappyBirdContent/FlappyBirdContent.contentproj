@@ -42,6 +42,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Entities\Bird\BirdShapeCollection.shcx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>BirdShapeCollection</Name>
+    </None>
     <None Include="Entities\Obstacle\PassThroughShapeCollectionFile.shcx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>PassThroughShapeCollectionFile</Name>

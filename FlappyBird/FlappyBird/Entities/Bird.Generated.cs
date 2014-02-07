@@ -3,12 +3,9 @@ using BitmapFont = FlatRedBall.Graphics.BitmapFont;
 using Cursor = FlatRedBall.Gui.Cursor;
 using GuiManager = FlatRedBall.Gui.GuiManager;
 // Generated Usings
-using FlappyBird.Screens;
 using FlatRedBall.Graphics;
 using FlatRedBall.Math;
-using FlappyBird.Performance;
 using FlappyBird.Entities;
-using FlappyBird.Factories;
 using FlatRedBall;
 using FlatRedBall.Screens;
 using System;
@@ -36,7 +33,7 @@ using Model = Microsoft.Xna.Framework.Graphics.Model;
 
 namespace FlappyBird.Entities
 {
-	public partial class Obstacle : PositionedObject, IDestroyable, IPoolable
+	public partial class Bird : PositionedObject, IDestroyable
 	{
         // This is made global so that static lazy-loaded content can access it.
         public static string ContentManagerName
@@ -52,28 +49,24 @@ namespace FlappyBird.Entities
 		static object mLockObject = new object();
 		static List<string> mRegisteredUnloads = new List<string>();
 		static List<string> LoadedContentManagers = new List<string>();
-		protected static FlatRedBall.Math.Geometry.ShapeCollection ShapeCollectionFile;
-		protected static FlatRedBall.Math.Geometry.ShapeCollection PassThroughShapeCollectionFile;
+		protected static FlatRedBall.Math.Geometry.ShapeCollection BirdShapeCollection;
 		
-		private FlatRedBall.Math.Geometry.ShapeCollection CollisionShapeCollection;
-		private FlatRedBall.Math.Geometry.ShapeCollection PassThroughShapeCollection;
-		public int Index { get; set; }
-		public bool Used { get; set; }
+		private FlatRedBall.Math.Geometry.ShapeCollection BirdCollision;
 		protected Layer LayerProvidedByContainer = null;
 
-        public Obstacle()
+        public Bird()
             : this(FlatRedBall.Screens.ScreenManager.CurrentScreen.ContentManagerName, true)
         {
 
         }
 
-        public Obstacle(string contentManagerName) :
+        public Bird(string contentManagerName) :
             this(contentManagerName, true)
         {
         }
 
 
-        public Obstacle(string contentManagerName, bool addToManagers) :
+        public Bird(string contentManagerName, bool addToManagers) :
 			base()
 		{
 			// Don't delete this:
@@ -86,8 +79,7 @@ namespace FlappyBird.Entities
 		{
 			// Generated Initialize
 			LoadStaticContent(ContentManagerName);
-			CollisionShapeCollection = ShapeCollectionFile.Clone();
-			PassThroughShapeCollection = PassThroughShapeCollectionFile.Clone();
+			BirdCollision = BirdShapeCollection.Clone();
 			
 			PostInitialize();
 			if (addToManagers)
@@ -120,18 +112,10 @@ namespace FlappyBird.Entities
 		{
 			// Generated Destroy
 			SpriteManager.RemovePositionedObject(this);
-			if (Used)
-			{
-				ObstacleFactory.MakeUnused(this, false);
-			}
 			
-			if (CollisionShapeCollection != null)
+			if (BirdCollision != null)
 			{
-				CollisionShapeCollection.RemoveFromManagers(false);
-			}
-			if (PassThroughShapeCollection != null)
-			{
-				PassThroughShapeCollection.RemoveFromManagers(false);
+				BirdCollision.RemoveFromManagers(ContentManagerName != "Global");
 			}
 
 
@@ -143,12 +127,9 @@ namespace FlappyBird.Entities
 		{
 			bool oldShapeManagerSuppressAdd = FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = true;
-			CollisionShapeCollection.CopyAbsoluteToRelative(false);
-			CollisionShapeCollection.AttachAllDetachedTo(this, false);
-			CollisionShapeCollection.Visible = true;
-			PassThroughShapeCollection.CopyAbsoluteToRelative(false);
-			PassThroughShapeCollection.AttachAllDetachedTo(this, false);
-			PassThroughShapeCollection.Visible = true;
+			BirdCollision.CopyAbsoluteToRelative(false);
+			BirdCollision.AttachAllDetachedTo(this, false);
+			BirdCollision.Visible = true;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = oldShapeManagerSuppressAdd;
 		}
 		public virtual void AddToManagersBottomUp (Layer layerToAddTo)
@@ -168,10 +149,8 @@ namespace FlappyBird.Entities
 			RotationX = 0;
 			RotationY = 0;
 			RotationZ = 0;
-			CollisionShapeCollection.AddToManagers(layerToAddTo);
-			CollisionShapeCollection.Visible = true;
-			PassThroughShapeCollection.AddToManagers(layerToAddTo);
-			PassThroughShapeCollection.Visible = true;
+			BirdCollision.AddToManagers(layerToAddTo);
+			BirdCollision.Visible = true;
 			X = oldX;
 			Y = oldY;
 			Z = oldZ;
@@ -209,20 +188,15 @@ namespace FlappyBird.Entities
 				{
 					if (!mRegisteredUnloads.Contains(ContentManagerName) && ContentManagerName != FlatRedBallServices.GlobalContentManager)
 					{
-						FlatRedBallServices.GetContentManagerByName(ContentManagerName).AddUnloadMethod("ObstacleStaticUnload", UnloadStaticContent);
+						FlatRedBallServices.GetContentManagerByName(ContentManagerName).AddUnloadMethod("BirdStaticUnload", UnloadStaticContent);
 						mRegisteredUnloads.Add(ContentManagerName);
 					}
 				}
-				if (!FlatRedBallServices.IsLoaded<FlatRedBall.Math.Geometry.ShapeCollection>(@"content/entities/obstacle/shapecollectionfile.shcx", ContentManagerName))
+				if (!FlatRedBallServices.IsLoaded<FlatRedBall.Math.Geometry.ShapeCollection>(@"content/entities/bird/birdshapecollection.shcx", ContentManagerName))
 				{
 					registerUnload = true;
 				}
-				ShapeCollectionFile = FlatRedBallServices.Load<FlatRedBall.Math.Geometry.ShapeCollection>(@"content/entities/obstacle/shapecollectionfile.shcx", ContentManagerName);
-				if (!FlatRedBallServices.IsLoaded<FlatRedBall.Math.Geometry.ShapeCollection>(@"content/entities/obstacle/passthroughshapecollectionfile.shcx", ContentManagerName))
-				{
-					registerUnload = true;
-				}
-				PassThroughShapeCollectionFile = FlatRedBallServices.Load<FlatRedBall.Math.Geometry.ShapeCollection>(@"content/entities/obstacle/passthroughshapecollectionfile.shcx", ContentManagerName);
+				BirdShapeCollection = FlatRedBallServices.Load<FlatRedBall.Math.Geometry.ShapeCollection>(@"content/entities/bird/birdshapecollection.shcx", ContentManagerName);
 			}
 			if (registerUnload && ContentManagerName != FlatRedBallServices.GlobalContentManager)
 			{
@@ -230,7 +204,7 @@ namespace FlappyBird.Entities
 				{
 					if (!mRegisteredUnloads.Contains(ContentManagerName) && ContentManagerName != FlatRedBallServices.GlobalContentManager)
 					{
-						FlatRedBallServices.GetContentManagerByName(ContentManagerName).AddUnloadMethod("ObstacleStaticUnload", UnloadStaticContent);
+						FlatRedBallServices.GetContentManagerByName(ContentManagerName).AddUnloadMethod("BirdStaticUnload", UnloadStaticContent);
 						mRegisteredUnloads.Add(ContentManagerName);
 					}
 				}
@@ -246,15 +220,10 @@ namespace FlappyBird.Entities
 			}
 			if (LoadedContentManagers.Count == 0)
 			{
-				if (ShapeCollectionFile != null)
+				if (BirdShapeCollection != null)
 				{
-					ShapeCollectionFile.RemoveFromManagers(ContentManagerName != "Global");
-					ShapeCollectionFile= null;
-				}
-				if (PassThroughShapeCollectionFile != null)
-				{
-					PassThroughShapeCollectionFile.RemoveFromManagers(ContentManagerName != "Global");
-					PassThroughShapeCollectionFile= null;
+					BirdShapeCollection.RemoveFromManagers(ContentManagerName != "Global");
+					BirdShapeCollection= null;
 				}
 			}
 		}
@@ -263,10 +232,8 @@ namespace FlappyBird.Entities
 		{
 			switch(memberName)
 			{
-				case  "ShapeCollectionFile":
-					return ShapeCollectionFile;
-				case  "PassThroughShapeCollectionFile":
-					return PassThroughShapeCollectionFile;
+				case  "BirdShapeCollection":
+					return BirdShapeCollection;
 			}
 			return null;
 		}
@@ -274,10 +241,8 @@ namespace FlappyBird.Entities
 		{
 			switch(memberName)
 			{
-				case  "ShapeCollectionFile":
-					return ShapeCollectionFile;
-				case  "PassThroughShapeCollectionFile":
-					return PassThroughShapeCollectionFile;
+				case  "BirdShapeCollection":
+					return BirdShapeCollection;
 			}
 			return null;
 		}
@@ -285,10 +250,8 @@ namespace FlappyBird.Entities
 		{
 			switch(memberName)
 			{
-				case  "ShapeCollectionFile":
-					return ShapeCollectionFile;
-				case  "PassThroughShapeCollectionFile":
-					return PassThroughShapeCollectionFile;
+				case  "BirdShapeCollection":
+					return BirdShapeCollection;
 			}
 			return null;
 		}
@@ -301,8 +264,7 @@ namespace FlappyBird.Entities
 		public virtual void SetToIgnorePausing ()
 		{
 			FlatRedBall.Instructions.InstructionManager.IgnorePausingFor(this);
-			FlatRedBall.Instructions.InstructionManager.IgnorePausingFor(CollisionShapeCollection);
-			FlatRedBall.Instructions.InstructionManager.IgnorePausingFor(PassThroughShapeCollection);
+			FlatRedBall.Instructions.InstructionManager.IgnorePausingFor(BirdCollision);
 		}
 		public virtual void MoveToLayer (Layer layerToMoveTo)
 		{
