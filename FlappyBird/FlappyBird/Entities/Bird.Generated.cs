@@ -3,9 +3,11 @@ using BitmapFont = FlatRedBall.Graphics.BitmapFont;
 using Cursor = FlatRedBall.Gui.Cursor;
 using GuiManager = FlatRedBall.Gui.GuiManager;
 // Generated Usings
+using FlappyBird.Screens;
 using FlatRedBall.Graphics;
 using FlatRedBall.Math;
 using FlappyBird.Entities;
+using FlappyBird.Factories;
 using FlatRedBall;
 using FlatRedBall.Screens;
 using System;
@@ -51,7 +53,16 @@ namespace FlappyBird.Entities
 		static List<string> LoadedContentManagers = new List<string>();
 		protected static FlatRedBall.Math.Geometry.ShapeCollection BirdShapeCollection;
 		
-		private FlatRedBall.Math.Geometry.ShapeCollection BirdCollision;
+		private FlatRedBall.Math.Geometry.ShapeCollection mBirdCollision;
+		public FlatRedBall.Math.Geometry.ShapeCollection BirdCollision
+		{
+			get
+			{
+				return mBirdCollision;
+			}
+		}
+		public float FallYAcceleration = -600f;
+		public float BounceYVelocity = 250f;
 		protected Layer LayerProvidedByContainer = null;
 
         public Bird()
@@ -79,7 +90,7 @@ namespace FlappyBird.Entities
 		{
 			// Generated Initialize
 			LoadStaticContent(ContentManagerName);
-			BirdCollision = BirdShapeCollection.Clone();
+			mBirdCollision = BirdShapeCollection.Clone();
 			
 			PostInitialize();
 			if (addToManagers)
@@ -127,8 +138,8 @@ namespace FlappyBird.Entities
 		{
 			bool oldShapeManagerSuppressAdd = FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = true;
-			BirdCollision.CopyAbsoluteToRelative(false);
-			BirdCollision.AttachAllDetachedTo(this, false);
+			mBirdCollision.CopyAbsoluteToRelative(false);
+			mBirdCollision.AttachAllDetachedTo(this, false);
 			BirdCollision.Visible = true;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = oldShapeManagerSuppressAdd;
 		}
@@ -149,14 +160,16 @@ namespace FlappyBird.Entities
 			RotationX = 0;
 			RotationY = 0;
 			RotationZ = 0;
-			BirdCollision.AddToManagers(layerToAddTo);
-			BirdCollision.Visible = true;
+			mBirdCollision.AddToManagers(layerToAddTo);
+			mBirdCollision.Visible = true;
 			X = oldX;
 			Y = oldY;
 			Z = oldZ;
 			RotationX = oldRotationX;
 			RotationY = oldRotationY;
 			RotationZ = oldRotationZ;
+			FallYAcceleration = -600f;
+			BounceYVelocity = 250f;
 		}
 		public virtual void ConvertToManuallyUpdated ()
 		{

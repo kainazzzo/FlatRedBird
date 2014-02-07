@@ -109,6 +109,28 @@
           <Name>Z</Name>
           <Type>float</Type>
         </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>float</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>FallYAcceleration</Name>
+          <Type>float</Type>
+          <DefaultValue xsi:type="xsd:float">-600</DefaultValue>
+        </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>float</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>BounceYVelocity</Name>
+          <Type>float</Type>
+          <DefaultValue xsi:type="xsd:float">250</DefaultValue>
+        </CustomVariable>
       </CustomVariables>
       <Name>Entities\Bird</Name>
       <NamedObjects>
@@ -122,6 +144,7 @@
           <SourceFile>Entities/Bird/BirdShapeCollection.shcx</SourceFile>
           <SourceName>Entire File (ShapeCollection)</SourceName>
           <InstanceName>BirdCollision</InstanceName>
+          <HasPublicProperty>true</HasPublicProperty>
           <AttachToContainer>true</AttachToContainer>
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>
@@ -184,6 +207,7 @@
           <SourceFile>Entities/Obstacle/ShapeCollectionFile.shcx</SourceFile>
           <SourceName>Entire File (ShapeCollection)</SourceName>
           <InstanceName>CollisionShapeCollection</InstanceName>
+          <HasPublicProperty>true</HasPublicProperty>
           <AttachToContainer>true</AttachToContainer>
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>
@@ -197,6 +221,7 @@
           <SourceFile>Entities/Obstacle/PassThroughShapeCollectionFile.shcx</SourceFile>
           <SourceName>Entire File (ShapeCollection)</SourceName>
           <InstanceName>PassThroughShapeCollection</InstanceName>
+          <HasPublicProperty>true</HasPublicProperty>
           <AttachToContainer>true</AttachToContainer>
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>

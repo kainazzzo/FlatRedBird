@@ -55,8 +55,22 @@ namespace FlappyBird.Entities
 		protected static FlatRedBall.Math.Geometry.ShapeCollection ShapeCollectionFile;
 		protected static FlatRedBall.Math.Geometry.ShapeCollection PassThroughShapeCollectionFile;
 		
-		private FlatRedBall.Math.Geometry.ShapeCollection CollisionShapeCollection;
-		private FlatRedBall.Math.Geometry.ShapeCollection PassThroughShapeCollection;
+		private FlatRedBall.Math.Geometry.ShapeCollection mCollisionShapeCollection;
+		public FlatRedBall.Math.Geometry.ShapeCollection CollisionShapeCollection
+		{
+			get
+			{
+				return mCollisionShapeCollection;
+			}
+		}
+		private FlatRedBall.Math.Geometry.ShapeCollection mPassThroughShapeCollection;
+		public FlatRedBall.Math.Geometry.ShapeCollection PassThroughShapeCollection
+		{
+			get
+			{
+				return mPassThroughShapeCollection;
+			}
+		}
 		public int Index { get; set; }
 		public bool Used { get; set; }
 		protected Layer LayerProvidedByContainer = null;
@@ -86,8 +100,8 @@ namespace FlappyBird.Entities
 		{
 			// Generated Initialize
 			LoadStaticContent(ContentManagerName);
-			CollisionShapeCollection = ShapeCollectionFile.Clone();
-			PassThroughShapeCollection = PassThroughShapeCollectionFile.Clone();
+			mCollisionShapeCollection = ShapeCollectionFile.Clone();
+			mPassThroughShapeCollection = PassThroughShapeCollectionFile.Clone();
 			
 			PostInitialize();
 			if (addToManagers)
@@ -143,11 +157,11 @@ namespace FlappyBird.Entities
 		{
 			bool oldShapeManagerSuppressAdd = FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = true;
-			CollisionShapeCollection.CopyAbsoluteToRelative(false);
-			CollisionShapeCollection.AttachAllDetachedTo(this, false);
+			mCollisionShapeCollection.CopyAbsoluteToRelative(false);
+			mCollisionShapeCollection.AttachAllDetachedTo(this, false);
 			CollisionShapeCollection.Visible = true;
-			PassThroughShapeCollection.CopyAbsoluteToRelative(false);
-			PassThroughShapeCollection.AttachAllDetachedTo(this, false);
+			mPassThroughShapeCollection.CopyAbsoluteToRelative(false);
+			mPassThroughShapeCollection.AttachAllDetachedTo(this, false);
 			PassThroughShapeCollection.Visible = true;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = oldShapeManagerSuppressAdd;
 		}
@@ -168,10 +182,10 @@ namespace FlappyBird.Entities
 			RotationX = 0;
 			RotationY = 0;
 			RotationZ = 0;
-			CollisionShapeCollection.AddToManagers(layerToAddTo);
-			CollisionShapeCollection.Visible = true;
-			PassThroughShapeCollection.AddToManagers(layerToAddTo);
-			PassThroughShapeCollection.Visible = true;
+			mCollisionShapeCollection.AddToManagers(layerToAddTo);
+			mCollisionShapeCollection.Visible = true;
+			mPassThroughShapeCollection.AddToManagers(layerToAddTo);
+			mPassThroughShapeCollection.Visible = true;
 			X = oldX;
 			Y = oldY;
 			Z = oldZ;

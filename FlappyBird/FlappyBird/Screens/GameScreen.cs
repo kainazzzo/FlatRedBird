@@ -1,4 +1,9 @@
 using System;
+using FlappyBird.Entities;
+using FlatRedBall.Content;
+using FlatRedBall.Debugging;
+using FlatRedBall.Math;
+using Microsoft.Xna.Framework;
 
 namespace FlappyBird.Screens
 {
@@ -6,7 +11,10 @@ namespace FlappyBird.Screens
 	{
 	    private double _lastSpawn = double.MinValue;
 	    readonly Random _random = new Random();
-		void CustomInitialize()
+	    private bool _spawning = true;
+	    private int _score;
+
+	    void CustomInitialize()
 		{
             
 		}
@@ -14,7 +22,8 @@ namespace FlappyBird.Screens
 // ReSharper disable once UnusedParameter.Local
 		void CustomActivity(bool firstTimeCalled)
 		{
-		    if (PauseAdjustedCurrentTime - _lastSpawn >= SpawnFrequency)
+            Debugger.Write(string.Format("Score: {0}", _score));
+		    if (_spawning && PauseAdjustedSecondsSince(_lastSpawn) >= SpawnFrequency)
 		    {
 		        var obstacle = Factories.ObstacleFactory.CreateNew();
 		        obstacle.XVelocity = ObstacleVelocityX;
@@ -22,9 +31,28 @@ namespace FlappyBird.Screens
 		        obstacle.Y = _random.Next(MinObstacleY, MaxObstacleY);
 		        _lastSpawn = PauseAdjustedCurrentTime;
 		    }
+
+		    foreach (var obstacle in ObstacleList)
+		    {
+		        if (BirdInstance.BirdCollision.CollideAgainst(obstacle.CollisionShapeCollection))
+		        {
+		            BirdInstance.Velocity = Vector3.Zero;
+		            BirdInstance.Acceleration = Vector3.Zero;
+		            _spawning = false;
+		            foreach (var obstacle1 in ObstacleList)
+		            {
+		                obstacle1.Velocity = Vector3.Zero;
+		            }
+		        }
+                else if (BirdInstance.BirdCollision.CollideAgainst(obstacle.PassThroughShapeCollection))
+                {
+                    ++_score;
+                    obstacle.PassThroughShapeCollection.Clear();
+                }
+		    }
 		}
 
-		void CustomDestroy()
+	    void CustomDestroy()
 		{
 
 

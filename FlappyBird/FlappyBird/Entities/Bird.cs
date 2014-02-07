@@ -30,14 +30,15 @@ namespace FlappyBird.Entities
 	{
 		private void CustomInitialize()
 		{
-
-
+		    YAcceleration = FallYAcceleration;
 		}
 
 		private void CustomActivity()
 		{
-
-
+		    if (InputManager.Keyboard.KeyPushed(Keys.Up))
+		    {
+		        YVelocity = BounceYVelocity;
+		    }
 		}
 
 		private void CustomDestroy()
