@@ -31,13 +31,19 @@ namespace FlatRedBird.Entities
 	{
 		private void CustomInitialize()
 		{
-		    YAcceleration = FallYAcceleration;
-		    Y = 0;
-		    Z = 1f;
-		    BirdSpriterObject.StartAnimation("Flap");
-		    BirdSpriterObject.Animating = false;
-		    Alive = true;
+		    Reset();
 		}
+
+	    public void Reset()
+	    {
+	        YAcceleration = FallYAcceleration;
+	        Y = 0;
+	        Z = 1f;
+	        BirdSpriterObject.StartAnimation("Flap");
+	        BirdSpriterObject.Animating = false;
+	        Alive = true;
+	        RotationZ = 0f;
+	    }
 
 	    private readonly float _downRotation = MathHelper.ToRadians(-30f);
 	    private readonly float _fastDownRotation = MathHelper.ToRadians(-80f);

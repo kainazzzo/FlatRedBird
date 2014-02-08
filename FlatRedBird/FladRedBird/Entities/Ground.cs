@@ -31,7 +31,7 @@ namespace FlatRedBird.Entities
 	{
 		private void CustomInitialize()
 		{
-		    XVelocity = GameScreen.ObstacleVelocityX;
+		    Reset();
 		}
 
 		private void CustomActivity()
@@ -53,5 +53,10 @@ namespace FlatRedBird.Entities
 
 
         }
+
+	    public void Reset()
+	    {
+            XVelocity = GameScreen.ObstacleVelocityX;
+	    }
 	}
 }

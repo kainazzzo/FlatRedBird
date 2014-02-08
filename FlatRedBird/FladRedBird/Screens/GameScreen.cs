@@ -1,10 +1,12 @@
 using System;
 using FlatRedBall.Graphics;
+using FlatRedBall.Input;
 using FlatRedBird.Entities;
 using FlatRedBall.Content;
 using FlatRedBall.Debugging;
 using FlatRedBall.Math;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace FlatRedBird.Screens
 {
@@ -14,6 +16,7 @@ namespace FlatRedBird.Screens
 	    readonly Random _random = new Random();
 	    private bool _winning = true;
 	    private int _score;
+	    private Text _retryText;
 
 	    void CustomInitialize()
 		{
@@ -66,6 +69,35 @@ namespace FlatRedBird.Screens
 	                obstacle1.Velocity = Vector3.Zero;
 	            }
 	            GroundInstance.Velocity = Vector3.Zero;
+	        }
+	        else
+	        {
+	            if (_retryText == null)
+	            {
+                    _retryText = new Text
+                    {
+                        DisplayText = "Hit Enter to try again",
+                        Scale = 16,
+                        Spacing = 16,
+                        X = -100
+                    };
+                    TextManager.AddText(_retryText);
+	            }
+
+	            if (InputManager.Keyboard.KeyPushed(Keys.Enter))
+	            {
+                    TextManager.RemoveText(_retryText);
+	                _retryText = null;
+	                _winning = true;
+	                _score = 0;
+	                foreach (var obstacle in ObstacleList)
+	                {
+	                    obstacle.X = -1000f;
+	                }
+                    _lastSpawn = Double.MinValue;
+	                BirdInstance.Reset();
+	                GroundInstance.Reset();
+	            }
 	        }
 	    }
 
