@@ -32,8 +32,10 @@ namespace FlatRedBird.Entities
 		private void CustomInitialize()
 		{
 		    YAcceleration = FallYAcceleration;
+		    Y = 0;
 		    BirdSpriterObject.StartAnimation("Flap");
 		    BirdSpriterObject.Animating = false;
+		    Alive = true;
 		}
 
 	    private readonly float _downRotation = MathHelper.ToRadians(-30f);
@@ -41,6 +43,11 @@ namespace FlatRedBird.Entities
 
 		private void CustomActivity()
 		{
+		    if (!Alive)
+		    {
+		        BirdSpriterObject.Animating = false;
+		        return;
+		    }
 		    if (InputManager.Keyboard.KeyPushed(Keys.Up))
 		    {
 		        YVelocity = BounceYVelocity;
@@ -79,5 +86,7 @@ namespace FlatRedBird.Entities
 
 
         }
+
+	    public bool Alive { get; set; }
 	}
 }

@@ -1,4 +1,5 @@
 using System;
+using FlatRedBall.Graphics;
 using FlatRedBird.Entities;
 using FlatRedBall.Content;
 using FlatRedBall.Debugging;
@@ -16,7 +17,6 @@ namespace FlatRedBird.Screens
 
 	    void CustomInitialize()
 		{
-            
 		}
 
 // ReSharper disable once UnusedParameter.Local
@@ -57,6 +57,7 @@ namespace FlatRedBird.Screens
 	    {
 	        if (_winning)
 	        {
+	            BirdInstance.Alive = false;
 	            BirdInstance.Velocity = Vector3.Zero;
 	            BirdInstance.Acceleration = Vector3.Zero;
 	            _winning = false;
