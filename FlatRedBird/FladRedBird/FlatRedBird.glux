@@ -61,11 +61,6 @@
           <RuntimeType>FlatRedBall.Math.Geometry.ShapeCollection</RuntimeType>
         </ReferencedFileSave>
         <ReferencedFileSave>
-          <Name>Screens/GameScreen/GroundSceneFile.scnx</Name>
-          <IsSharedStatic>true</IsSharedStatic>
-          <RuntimeType>FlatRedBall.Scene</RuntimeType>
-        </ReferencedFileSave>
-        <ReferencedFileSave>
           <Name>Screens/GameScreen/SkySceneFile.scnx</Name>
           <IsSharedStatic>true</IsSharedStatic>
           <RuntimeType>FlatRedBall.Scene</RuntimeType>
@@ -283,7 +278,7 @@
       <NamedObjects>
         <NamedObjectSave>
           <SourceType>File</SourceType>
-          <SourceFile>Entities/Ground/GroundTMXFile.scnx</SourceFile>
+          <SourceFile>Entities/Ground/GroundSceneFile.scnx</SourceFile>
           <SourceName>Entire File (Scene)</SourceName>
           <InstanceName>EntireScene</InstanceName>
           <AttachToContainer>true</AttachToContainer>
@@ -292,10 +287,8 @@
       </NamedObjects>
       <ReferencedFiles>
         <ReferencedFileSave>
-          <Name>Entities/Ground/GroundTMXFile.scnx</Name>
+          <Name>Entities/Ground/GroundSceneFile.scnx</Name>
           <IsSharedStatic>true</IsSharedStatic>
-          <SourceFile>Entities/Ground/GroundTMXFile.tmx</SourceFile>
-          <BuildTool>*.tmx -&gt; TmxToScnx.exe -&gt; *.scnx</BuildTool>
           <RuntimeType>FlatRedBall.Scene</RuntimeType>
         </ReferencedFileSave>
       </ReferencedFiles>

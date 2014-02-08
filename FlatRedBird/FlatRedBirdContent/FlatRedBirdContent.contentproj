@@ -54,9 +54,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>SpriterObjectCollectionFile</Name>
     </None>
-    <None Include="Entities\Ground\GroundTMXFile.scnx">
+    <None Include="Entities\Ground\GroundSceneFile.scnx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Name>GroundTMXFile</Name>
+      <Name>GroundSceneFile</Name>
     </None>
     <None Include="Entities\Ground\tiles.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -81,10 +81,6 @@
     <None Include="Screens\GameScreen\BoundaryShapeCollection.shcx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>BoundaryShapeCollection</Name>
-    </None>
-    <None Include="Screens\GameScreen\GroundSceneFile.scnx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Name>GroundSceneFile</Name>
     </None>
     <None Include="Screens\GameScreen\sky3.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

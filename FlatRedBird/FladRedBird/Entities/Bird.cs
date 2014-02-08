@@ -33,6 +33,7 @@ namespace FlatRedBird.Entities
 		{
 		    YAcceleration = FallYAcceleration;
 		    Y = 0;
+		    Z = 1f;
 		    BirdSpriterObject.StartAnimation("Flap");
 		    BirdSpriterObject.Animating = false;
 		    Alive = true;

@@ -50,7 +50,7 @@ namespace FlatRedBird.Entities
 		static object mLockObject = new object();
 		static List<string> mRegisteredUnloads = new List<string>();
 		static List<string> LoadedContentManagers = new List<string>();
-		protected static FlatRedBall.Scene GroundTMXFile;
+		protected static FlatRedBall.Scene GroundSceneFile;
 		
 		private FlatRedBall.Scene EntireScene;
 		protected Layer LayerProvidedByContainer = null;
@@ -80,7 +80,7 @@ namespace FlatRedBird.Entities
 		{
 			// Generated Initialize
 			LoadStaticContent(ContentManagerName);
-			EntireScene = GroundTMXFile.Clone();
+			EntireScene = GroundSceneFile.Clone();
 			for (int i = 0; i < EntireScene.Texts.Count; i++)
 			{
 				EntireScene.Texts[i].AdjustPositionForPixelPerfectDrawing = true;
@@ -197,11 +197,11 @@ namespace FlatRedBird.Entities
 						mRegisteredUnloads.Add(ContentManagerName);
 					}
 				}
-				if (!FlatRedBallServices.IsLoaded<FlatRedBall.Scene>(@"content/entities/ground/groundtmxfile.scnx", ContentManagerName))
+				if (!FlatRedBallServices.IsLoaded<FlatRedBall.Scene>(@"content/entities/ground/groundscenefile.scnx", ContentManagerName))
 				{
 					registerUnload = true;
 				}
-				GroundTMXFile = FlatRedBallServices.Load<FlatRedBall.Scene>(@"content/entities/ground/groundtmxfile.scnx", ContentManagerName);
+				GroundSceneFile = FlatRedBallServices.Load<FlatRedBall.Scene>(@"content/entities/ground/groundscenefile.scnx", ContentManagerName);
 			}
 			if (registerUnload && ContentManagerName != FlatRedBallServices.GlobalContentManager)
 			{
@@ -225,10 +225,10 @@ namespace FlatRedBird.Entities
 			}
 			if (LoadedContentManagers.Count == 0)
 			{
-				if (GroundTMXFile != null)
+				if (GroundSceneFile != null)
 				{
-					GroundTMXFile.RemoveFromManagers(ContentManagerName != "Global");
-					GroundTMXFile= null;
+					GroundSceneFile.RemoveFromManagers(ContentManagerName != "Global");
+					GroundSceneFile= null;
 				}
 			}
 		}
@@ -237,8 +237,8 @@ namespace FlatRedBird.Entities
 		{
 			switch(memberName)
 			{
-				case  "GroundTMXFile":
-					return GroundTMXFile;
+				case  "GroundSceneFile":
+					return GroundSceneFile;
 			}
 			return null;
 		}
@@ -246,8 +246,8 @@ namespace FlatRedBird.Entities
 		{
 			switch(memberName)
 			{
-				case  "GroundTMXFile":
-					return GroundTMXFile;
+				case  "GroundSceneFile":
+					return GroundSceneFile;
 			}
 			return null;
 		}
@@ -255,8 +255,8 @@ namespace FlatRedBird.Entities
 		{
 			switch(memberName)
 			{
-				case  "GroundTMXFile":
-					return GroundTMXFile;
+				case  "GroundSceneFile":
+					return GroundSceneFile;
 			}
 			return null;
 		}

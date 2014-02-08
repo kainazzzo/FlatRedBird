@@ -38,7 +38,6 @@ namespace FlatRedBird.Screens
 		static bool HasBeenLoadedWithGlobalContentManager = false;
 		#endif
 		protected static FlatRedBall.Math.Geometry.ShapeCollection BoundaryShapeCollection;
-		protected static FlatRedBall.Scene GroundSceneFile;
 		protected static FlatRedBall.Scene SkySceneFile;
 		
 		private FlatRedBird.Entities.Bird BirdInstance;
@@ -147,22 +146,6 @@ namespace FlatRedBird.Screens
 			}
 			if (this.UnloadsContentManagerWhenDestroyed && ContentManagerName != "Global")
 			{
-				GroundSceneFile.RemoveFromManagers(ContentManagerName != "Global");
-			}
-			else
-			{
-				GroundSceneFile.RemoveFromManagers(false);
-			}
-			if (this.UnloadsContentManagerWhenDestroyed && ContentManagerName != "Global")
-			{
-				GroundSceneFile = null;
-			}
-			else
-			{
-				GroundSceneFile.MakeOneWay();
-			}
-			if (this.UnloadsContentManagerWhenDestroyed && ContentManagerName != "Global")
-			{
 				SkySceneFile.RemoveFromManagers(ContentManagerName != "Global");
 			}
 			else
@@ -235,7 +218,6 @@ namespace FlatRedBird.Screens
 		{
 			CameraSetup.ResetCamera(SpriteManager.Camera);
 			BoundaryShapeCollection.AddToManagers(mLayer);
-			GroundSceneFile.AddToManagers(mLayer);
 			SkySceneFile.AddToManagers(mLayer);
 			BirdInstance.AddToManagers(mLayer);
 			Boundary.Visible = false;
@@ -290,10 +272,6 @@ namespace FlatRedBird.Screens
 			{
 			}
 			BoundaryShapeCollection = FlatRedBallServices.Load<FlatRedBall.Math.Geometry.ShapeCollection>(@"content/screens/gamescreen/boundaryshapecollection.shcx", contentManagerName);
-			if (!FlatRedBallServices.IsLoaded<FlatRedBall.Scene>(@"content/screens/gamescreen/groundscenefile.scnx", contentManagerName))
-			{
-			}
-			GroundSceneFile = FlatRedBallServices.Load<FlatRedBall.Scene>(@"content/screens/gamescreen/groundscenefile.scnx", contentManagerName);
 			if (!FlatRedBallServices.IsLoaded<FlatRedBall.Scene>(@"content/screens/gamescreen/skyscenefile.scnx", contentManagerName))
 			{
 			}
@@ -309,8 +287,6 @@ namespace FlatRedBird.Screens
 			{
 				case  "BoundaryShapeCollection":
 					return BoundaryShapeCollection;
-				case  "GroundSceneFile":
-					return GroundSceneFile;
 				case  "SkySceneFile":
 					return SkySceneFile;
 			}
@@ -322,8 +298,6 @@ namespace FlatRedBird.Screens
 			{
 				case  "BoundaryShapeCollection":
 					return BoundaryShapeCollection;
-				case  "GroundSceneFile":
-					return GroundSceneFile;
 				case  "SkySceneFile":
 					return SkySceneFile;
 			}
@@ -335,8 +309,6 @@ namespace FlatRedBird.Screens
 			{
 				case  "BoundaryShapeCollection":
 					return BoundaryShapeCollection;
-				case  "GroundSceneFile":
-					return GroundSceneFile;
 				case  "SkySceneFile":
 					return SkySceneFile;
 			}

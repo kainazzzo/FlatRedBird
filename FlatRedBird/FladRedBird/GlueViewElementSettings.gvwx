@@ -17,8 +17,8 @@
     </ElementCameraSave>
     <ElementCameraSave>
       <CameraSave>
-        <X>0</X>
-        <Y>0</Y>
+        <X>90.6610641</X>
+        <Y>-10.4608889</Y>
         <Z>40</Z>
         <Orthogonal>true</Orthogonal>
         <OrthogonalHeight>697.392639</OrthogonalHeight>
@@ -31,8 +31,8 @@
     </ElementCameraSave>
     <ElementCameraSave>
       <CameraSave>
-        <X>0</X>
-        <Y>0</Y>
+        <X>-23</X>
+        <Y>-279</Y>
         <Z>40</Z>
         <Orthogonal>true</Orthogonal>
         <OrthogonalHeight>600</OrthogonalHeight>
