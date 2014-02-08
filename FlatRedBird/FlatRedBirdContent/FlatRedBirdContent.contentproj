@@ -62,9 +62,17 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>tiles</Name>
     </None>
+    <None Include="Entities\Obstacle\column_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>column_0</Name>
+    </None>
     <None Include="Entities\Obstacle\PassThroughShapeCollectionFile.shcx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>PassThroughShapeCollectionFile</Name>
+    </None>
+    <None Include="Entities\Obstacle\SceneFile.scnx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>SceneFile</Name>
     </None>
     <None Include="Entities\Obstacle\ShapeCollectionFile.shcx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -77,6 +85,14 @@
     <None Include="Screens\GameScreen\GroundSceneFile.scnx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>GroundSceneFile</Name>
+    </None>
+    <None Include="Screens\GameScreen\sky3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>sky3</Name>
+    </None>
+    <None Include="Screens\GameScreen\SkySceneFile.scnx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>SkySceneFile</Name>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

@@ -36,7 +36,7 @@ namespace FlatRedBird.Entities
 
 		private void CustomActivity()
 		{
-		    if (X <= -416f)
+		    if (X <= -1024f)
 		    {
 		        X = -400f;
 		    }

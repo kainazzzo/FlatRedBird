@@ -65,6 +65,11 @@
           <IsSharedStatic>true</IsSharedStatic>
           <RuntimeType>FlatRedBall.Scene</RuntimeType>
         </ReferencedFileSave>
+        <ReferencedFileSave>
+          <Name>Screens/GameScreen/SkySceneFile.scnx</Name>
+          <IsSharedStatic>true</IsSharedStatic>
+          <RuntimeType>FlatRedBall.Scene</RuntimeType>
+        </ReferencedFileSave>
       </ReferencedFiles>
       <NamedObjects>
         <NamedObjectSave>
@@ -109,6 +114,14 @@
           <SourceType>Entity</SourceType>
           <SourceClassType>Entities\Ground</SourceClassType>
           <InstanceName>GroundInstance</InstanceName>
+          <AttachToContainer>true</AttachToContainer>
+          <IndependentOfCamera>true</IndependentOfCamera>
+        </NamedObjectSave>
+        <NamedObjectSave>
+          <SourceType>File</SourceType>
+          <SourceFile>Screens/GameScreen/SkySceneFile.scnx</SourceFile>
+          <SourceName>Entire File (Scene)</SourceName>
+          <InstanceName>SkySceneInstance</InstanceName>
           <AttachToContainer>true</AttachToContainer>
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>
@@ -331,7 +344,7 @@
           <CustomProperty>
             <Type>bool</Type>
             <Member>Visible</Member>
-            <ValueAsBool>true</ValueAsBool>
+            <ValueAsBool>false</ValueAsBool>
           </CustomProperty>
           <SourceType>File</SourceType>
           <SourceFile>Entities/Obstacle/ShapeCollectionFile.shcx</SourceFile>
@@ -345,13 +358,21 @@
           <CustomProperty>
             <Type>bool</Type>
             <Member>Visible</Member>
-            <ValueAsBool>true</ValueAsBool>
+            <ValueAsBool>false</ValueAsBool>
           </CustomProperty>
           <SourceType>File</SourceType>
           <SourceFile>Entities/Obstacle/PassThroughShapeCollectionFile.shcx</SourceFile>
           <SourceName>Entire File (ShapeCollection)</SourceName>
           <InstanceName>PassThroughShapeCollection</InstanceName>
           <HasPublicProperty>true</HasPublicProperty>
+          <AttachToContainer>true</AttachToContainer>
+          <IndependentOfCamera>true</IndependentOfCamera>
+        </NamedObjectSave>
+        <NamedObjectSave>
+          <SourceType>File</SourceType>
+          <SourceFile>Entities/Obstacle/SceneFile.scnx</SourceFile>
+          <SourceName>Entire File (Scene)</SourceName>
+          <InstanceName>EntireScene</InstanceName>
           <AttachToContainer>true</AttachToContainer>
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>
@@ -366,6 +387,11 @@
           <Name>Entities/Obstacle/PassThroughShapeCollectionFile.shcx</Name>
           <IsSharedStatic>true</IsSharedStatic>
           <RuntimeType>FlatRedBall.Math.Geometry.ShapeCollection</RuntimeType>
+        </ReferencedFileSave>
+        <ReferencedFileSave>
+          <Name>Entities/Obstacle/SceneFile.scnx</Name>
+          <IsSharedStatic>true</IsSharedStatic>
+          <RuntimeType>FlatRedBall.Scene</RuntimeType>
         </ReferencedFileSave>
       </ReferencedFiles>
       <CreatedByOtherEntities>true</CreatedByOtherEntities>

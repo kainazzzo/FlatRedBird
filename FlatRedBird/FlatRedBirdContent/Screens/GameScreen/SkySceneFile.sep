@@ -4,7 +4,7 @@
     <X>0</X>
     <Y>0</Y>
     <Z>-40</Z>
-    <Orthogonal>false</Orthogonal>
+    <Orthogonal>true</Orthogonal>
     <OrthogonalHeight>600</OrthogonalHeight>
     <OrthogonalWidth>800</OrthogonalWidth>
     <NearClipPlane>1</NearClipPlane>
@@ -12,23 +12,23 @@
     <AspectRatio>1.33333337</AspectRatio>
   </BoundsCamera>
   <Camera>
-    <X>-335.281036</X>
-    <Y>-203.014282</Y>
+    <X>-352.872925</X>
+    <Y>254.333374</Y>
     <Z>-40</Z>
     <Orthogonal>true</Orthogonal>
-    <OrthogonalHeight>1510.30371</OrthogonalHeight>
+    <OrthogonalHeight>1587.31018</OrthogonalHeight>
     <OrthogonalWidth>-1</OrthogonalWidth>
     <NearClipPlane>1</NearClipPlane>
     <FarClipPlane>1000</FarClipPlane>
     <AspectRatio>1.33333337</AspectRatio>
   </Camera>
-  <BoundsVisible>false</BoundsVisible>
+  <BoundsVisible>true</BoundsVisible>
   <WorldAxesVisible>true</WorldAxesVisible>
   <PixelSize>0</PixelSize>
   <FilesToMakeDotDotSlashRelative />
   <TextureDisplayRegionsList>
     <TextureDisplayRegionsSave>
-      <TextureName>column_0.png</TextureName>
+      <TextureName>sky3.jpg</TextureName>
       <DisplayRegions />
     </TextureDisplayRegionsSave>
   </TextureDisplayRegionsList>

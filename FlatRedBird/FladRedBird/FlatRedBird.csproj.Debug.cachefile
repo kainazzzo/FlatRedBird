@@ -3,8 +3,12 @@ Content\Entities\Bird\redball.png
 Content\Entities\Bird\SpriterObjectCollectionFile.scml
 Content\Entities\Ground\GroundTMXFile.scnx
 Content\Entities\Ground\tiles.png
+Content\Entities\Obstacle\column_0.png
 Content\Entities\Obstacle\PassThroughShapeCollectionFile.shcx
+Content\Entities\Obstacle\SceneFile.scnx
 Content\Entities\Obstacle\ShapeCollectionFile.shcx
 Content\Screens\GameScreen\BoundaryShapeCollection.shcx
 Content\Screens\GameScreen\GroundSceneFile.scnx
+Content\Screens\GameScreen\sky3.jpg
+Content\Screens\GameScreen\SkySceneFile.scnx
 redball.BMP

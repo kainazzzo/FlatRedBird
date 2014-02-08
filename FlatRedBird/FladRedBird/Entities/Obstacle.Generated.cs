@@ -54,6 +54,7 @@ namespace FlatRedBird.Entities
 		static List<string> LoadedContentManagers = new List<string>();
 		protected static FlatRedBall.Math.Geometry.ShapeCollection ShapeCollectionFile;
 		protected static FlatRedBall.Math.Geometry.ShapeCollection PassThroughShapeCollectionFile;
+		protected static FlatRedBall.Scene SceneFile;
 		
 		private FlatRedBall.Math.Geometry.ShapeCollection mCollisionShapeCollection;
 		public FlatRedBall.Math.Geometry.ShapeCollection CollisionShapeCollection
@@ -71,6 +72,7 @@ namespace FlatRedBird.Entities
 				return mPassThroughShapeCollection;
 			}
 		}
+		private FlatRedBall.Scene EntireScene;
 		public int Index { get; set; }
 		public bool Used { get; set; }
 		protected Layer LayerProvidedByContainer = null;
@@ -102,6 +104,11 @@ namespace FlatRedBird.Entities
 			LoadStaticContent(ContentManagerName);
 			mCollisionShapeCollection = ShapeCollectionFile.Clone();
 			mPassThroughShapeCollection = PassThroughShapeCollectionFile.Clone();
+			EntireScene = SceneFile.Clone();
+			for (int i = 0; i < EntireScene.Texts.Count; i++)
+			{
+				EntireScene.Texts[i].AdjustPositionForPixelPerfectDrawing = true;
+			}
 			
 			PostInitialize();
 			if (addToManagers)
@@ -126,6 +133,7 @@ namespace FlatRedBird.Entities
 			// Generated Activity
 			
 			CustomActivity();
+			EntireScene.ManageAll();
 			
 			// After Custom Activity
 		}
@@ -147,6 +155,10 @@ namespace FlatRedBird.Entities
 			{
 				PassThroughShapeCollection.RemoveFromManagers(false);
 			}
+			if (EntireScene != null)
+			{
+				EntireScene.RemoveFromManagers(false);
+			}
 
 
 			CustomDestroy();
@@ -159,10 +171,12 @@ namespace FlatRedBird.Entities
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = true;
 			mCollisionShapeCollection.CopyAbsoluteToRelative(false);
 			mCollisionShapeCollection.AttachAllDetachedTo(this, false);
-			CollisionShapeCollection.Visible = true;
+			CollisionShapeCollection.Visible = false;
 			mPassThroughShapeCollection.CopyAbsoluteToRelative(false);
 			mPassThroughShapeCollection.AttachAllDetachedTo(this, false);
-			PassThroughShapeCollection.Visible = true;
+			PassThroughShapeCollection.Visible = false;
+			EntireScene.CopyAbsoluteToRelative(false);
+			EntireScene.AttachAllDetachedTo(this, false);
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = oldShapeManagerSuppressAdd;
 		}
 		public virtual void AddToManagersBottomUp (Layer layerToAddTo)
@@ -183,9 +197,10 @@ namespace FlatRedBird.Entities
 			RotationY = 0;
 			RotationZ = 0;
 			mCollisionShapeCollection.AddToManagers(layerToAddTo);
-			mCollisionShapeCollection.Visible = true;
+			mCollisionShapeCollection.Visible = false;
 			mPassThroughShapeCollection.AddToManagers(layerToAddTo);
-			mPassThroughShapeCollection.Visible = true;
+			mPassThroughShapeCollection.Visible = false;
+			EntireScene.AddToManagers(layerToAddTo);
 			X = oldX;
 			Y = oldY;
 			Z = oldZ;
@@ -197,6 +212,7 @@ namespace FlatRedBird.Entities
 		{
 			this.ForceUpdateDependenciesDeep();
 			SpriteManager.ConvertToManuallyUpdated(this);
+			EntireScene.ConvertToManuallyUpdated();
 		}
 		public static void LoadStaticContent (string contentManagerName)
 		{
@@ -237,6 +253,11 @@ namespace FlatRedBird.Entities
 					registerUnload = true;
 				}
 				PassThroughShapeCollectionFile = FlatRedBallServices.Load<FlatRedBall.Math.Geometry.ShapeCollection>(@"content/entities/obstacle/passthroughshapecollectionfile.shcx", ContentManagerName);
+				if (!FlatRedBallServices.IsLoaded<FlatRedBall.Scene>(@"content/entities/obstacle/scenefile.scnx", ContentManagerName))
+				{
+					registerUnload = true;
+				}
+				SceneFile = FlatRedBallServices.Load<FlatRedBall.Scene>(@"content/entities/obstacle/scenefile.scnx", ContentManagerName);
 			}
 			if (registerUnload && ContentManagerName != FlatRedBallServices.GlobalContentManager)
 			{
@@ -270,6 +291,11 @@ namespace FlatRedBird.Entities
 					PassThroughShapeCollectionFile.RemoveFromManagers(ContentManagerName != "Global");
 					PassThroughShapeCollectionFile= null;
 				}
+				if (SceneFile != null)
+				{
+					SceneFile.RemoveFromManagers(ContentManagerName != "Global");
+					SceneFile= null;
+				}
 			}
 		}
 		[System.Obsolete("Use GetFile instead")]
@@ -281,6 +307,8 @@ namespace FlatRedBird.Entities
 					return ShapeCollectionFile;
 				case  "PassThroughShapeCollectionFile":
 					return PassThroughShapeCollectionFile;
+				case  "SceneFile":
+					return SceneFile;
 			}
 			return null;
 		}
@@ -292,6 +320,8 @@ namespace FlatRedBird.Entities
 					return ShapeCollectionFile;
 				case  "PassThroughShapeCollectionFile":
 					return PassThroughShapeCollectionFile;
+				case  "SceneFile":
+					return SceneFile;
 			}
 			return null;
 		}
@@ -303,6 +333,8 @@ namespace FlatRedBird.Entities
 					return ShapeCollectionFile;
 				case  "PassThroughShapeCollectionFile":
 					return PassThroughShapeCollectionFile;
+				case  "SceneFile":
+					return SceneFile;
 			}
 			return null;
 		}
@@ -317,9 +349,15 @@ namespace FlatRedBird.Entities
 			FlatRedBall.Instructions.InstructionManager.IgnorePausingFor(this);
 			FlatRedBall.Instructions.InstructionManager.IgnorePausingFor(CollisionShapeCollection);
 			FlatRedBall.Instructions.InstructionManager.IgnorePausingFor(PassThroughShapeCollection);
+			FlatRedBall.Instructions.InstructionManager.IgnorePausingFor(EntireScene);
 		}
 		public virtual void MoveToLayer (Layer layerToMoveTo)
 		{
+			if (LayerProvidedByContainer != null)
+			{
+				LayerProvidedByContainer.Remove(EntireScene);
+			}
+			EntireScene.AddToManagers(layerToMoveTo);
 			LayerProvidedByContainer = layerToMoveTo;
 		}
 

@@ -5,7 +5,7 @@
       <X>1</X>
       <Y>-285</Y>
       <Z>0</Z>
-      <ScaleX>48</ScaleX>
+      <ScaleX>60</ScaleX>
       <ScaleY>215</ScaleY>
       <Name>AxisAlignedRectangle3</Name>
       <Alpha>1</Alpha>
@@ -17,7 +17,7 @@
       <X>0</X>
       <Y>285</Y>
       <Z>0</Z>
-      <ScaleX>48</ScaleX>
+      <ScaleX>60</ScaleX>
       <ScaleY>215</ScaleY>
       <Name>AxisAlignedRectangle4</Name>
       <Alpha>1</Alpha>
